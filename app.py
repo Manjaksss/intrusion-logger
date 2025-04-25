@@ -6,6 +6,21 @@ import sqlite3
 app = Flask(__name__)
 
 def init_db():
+# Recreate database if missing columns
+def check_and_reset_db():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    try:
+        c.execute("SELECT router_name FROM events LIMIT 1")
+    except sqlite3.OperationalError:
+        print("router_name column missing — recreating DB...")
+        conn.close()
+        os.remove('events.db')
+        init_db()
+    else:
+        conn.close()
+
+check_and_reset_db()
     conn = sqlite3.connect('events.db')
     c = conn.cursor()
     c.execute("""
