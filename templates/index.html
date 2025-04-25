@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intrusion Logger</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Intrusion Event Dashboard</h1>
+    <table>
+        <tr>
+            <th>Router Name</th>
+            <th>Source IP</th>
+            <th>Event Type</th>
+            <th>Description</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for event in events %}
+        <tr>
+            <td>{{ event[0] }}</td>
+            <td>{{ event[1] }}</td>
+            <td>{{ event[2] }}</td>
+            <td>{{ event[3] }}</td>
+            <td>{{ event[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
